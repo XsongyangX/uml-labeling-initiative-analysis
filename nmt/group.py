@@ -34,9 +34,11 @@ def read_source(location):
     fragments.sort_values(by=['unique_id'], inplace=True)
 
     # iterate through labels
-    for label in labels:
+    for index, label in labels.iterrows():
         echo = subprocess.Popen(["echo", label["label"]], stdout=subprocess.PIPE)
-        tokenize = subprocess.check_output(["bash", "tokenize.sh"], stdin=echo.stdout)
+        tokenize = subprocess.check_output(["bash",
+            "nmt/tokenize.sh"
+            ], stdin=echo.stdout).decode("utf-8") 
 
         paired_labels.append(tokenize)
 
@@ -44,7 +46,9 @@ def read_source(location):
 
         # open fragment plantuml code
         fragment_file = "{model}_{kind}{number}.plantuml".format(model=fragment["model"], kind=fragment["kind"], number=fragment["number"])
-        flatten = subprocess.check_output(["bash", "flatten.sh", os.path.join("zoo", fragment_file)])
+        flatten = subprocess.check_output(["bash", 
+            "nmt/flatten.sh",
+            os.path.join("zoo", fragment_file)]).decode("utf-8") 
 
         paired_fragments.append(flatten)
         
@@ -57,10 +61,16 @@ def read_source(location):
     train_english, valid_english = train_test_split(train_english, test_size=0.25)
     train_fragments, valid_fragments = train_test_split(train_fragments, test_size=0.25)
 
-    os.makedirs("data", exist_ok=True)
-    with open("data/english.txt", 'w') as english:
-        english.writelines(paired_labels)
-    with open("data/fragments.txt", 'w') as target:
-        target.writelines(paired_fragments)
+    os.makedirs("nmt/data", exist_ok=True)
+    for section, eng, frag in [("train", train_english, train_fragments),
+        ("valid", valid_english, valid_fragments),
+        ("test", test_english, test_fragments)]:
+        
+        with open(f"nmt/data/{section}.en", 'w') as english:
+            for line in eng:
+                english.write(line + "\n")
+        with open(f"nmt/data/{section}.uml", 'w') as target:
+            for line in frag:
+                target.write(line + "\n")
 
 read_source(sys.argv[1])
