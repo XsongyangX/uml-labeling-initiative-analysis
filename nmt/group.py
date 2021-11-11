@@ -35,10 +35,7 @@ def read_source(location):
 
     # iterate through labels
     for index, label in labels.iterrows():
-        echo = subprocess.Popen(["echo", label["label"]], stdout=subprocess.PIPE)
-        tokenize = subprocess.check_output(["bash",
-            "nmt/tokenize.sh"
-            ], stdin=echo.stdout).decode("utf-8") 
+        tokenize = " ".join(label["label"].split())
 
         paired_labels.append(tokenize)
 
@@ -46,20 +43,16 @@ def read_source(location):
 
         # open fragment plantuml code
         fragment_file = "{model}_{kind}{number}.plantuml".format(model=fragment["model"], kind=fragment["kind"], number=fragment["number"])
-        flatten = subprocess.check_output(["bash", 
-            "nmt/flatten.sh",
-            os.path.join("zoo", fragment_file)]).decode("utf-8") 
+        flatten = open(os.path.join("zoo", fragment_file), "r").read().replace("\n", " 0newline0 ")
 
         paired_fragments.append(flatten)
         
     # output to files
 
     # split
-    train_english, test_english = train_test_split(paired_labels, test_size = 0.1)
-    train_fragments, test_fragments = train_test_split(paired_fragments, test_size = 0.1)
+    train_english, test_english, train_fragments, test_fragments = train_test_split(paired_labels, paired_fragments, test_size = 0.1)
 
-    train_english, valid_english = train_test_split(train_english, test_size=0.25)
-    train_fragments, valid_fragments = train_test_split(train_fragments, test_size=0.25)
+    train_english, valid_english, train_fragments, valid_fragments = train_test_split(train_english, train_fragments, test_size=0.25)
 
     os.makedirs("nmt/data", exist_ok=True)
     for section, eng, frag in [("train", train_english, train_fragments),

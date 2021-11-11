@@ -3,6 +3,7 @@ Data comes from umllabels.herokuapp.com
 
 ## Usage
 * `get.sh` will get the data from the cloud and export csv data locally
+* `download_zoo.sh` gets the image data from github
 
 ### NMT
 NMT uses the framework at https://github.com/lmthang/nmt.hybrid. 
@@ -10,3 +11,6 @@ NMT uses the framework at https://github.com/lmthang/nmt.hybrid.
 * `expand.sh` reverses the effect of flattening
 * `tokenize.sh` replaces newlines by spaces
 * `group.py` groups the data for training
+* `install.sh` prepares the code for the training model
+* `train.sh` trains a model given a previously processed data by `group.py`
+* `test.sh` tests the model by decoding and using BLEU
