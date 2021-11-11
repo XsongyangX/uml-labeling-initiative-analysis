@@ -5,8 +5,6 @@ python vocab.py --train-src=../data/train.en \
   --freq-cutoff=0 \
   ../data/vocab.json
 
-%%bash
-cd nmt/torch/ 
 python nmt.py train --train-src=../data/train.en \
   --train-tgt=../data/train.uml \
   --dev-src=../data/valid.en \

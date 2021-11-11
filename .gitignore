@@ -1,3 +1,5 @@
 zoo/
 
 .vscode/
+*.tar*
+*.db
