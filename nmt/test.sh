@@ -13,4 +13,5 @@ python nmt.py \
 perl multi-bleu.perl ../data/test.uml < ../data/decode.txt
 
 cd ..
-./expand.sh data/test.en > data/test.plantuml
+./expand.sh data/test.uml > data/test.plantuml
+./expand.sh data/decode.txt > data/decode.plantuml
