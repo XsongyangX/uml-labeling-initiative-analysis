@@ -150,6 +150,7 @@ Transition has no attributes.",4715,t,t
 674,A makefile is composed by zero or one comment,5340,t,t
 675,A make file contains rules. Each rule may have dependencies,6612,t,t
 676,Makefiles contains elements. Each element has a name,259,t,t
+713,Defines an object for defining reuses. Can contain reuse clauses.,7738,t,t
 34,The fragment is composed of the State class with an association to from State to State named combination with a multiplicity of 1.,6442,t,t
 36,A Contact may have any number of land line numbers,6904,f,t
 37,a land line number is mapped to exactly one contact,7444,t,t
@@ -350,6 +351,9 @@ Transition has no attributes.",4715,t,t
 529,"A generic, abstract model.",1499,t,t
 577,A core model contains classifiers,924,t,t
 642,A class named ICdeComponent,3068,t,t
+714,The clause that constraints the reuse,3249,t,t
+715,The object that provides reuse,4137,t,t
+718,The base class for defining a work. Can have parent works,7326,t,t
 337,ModelElement is a class that belongs to SimplifiedMiningMart Package,2132,t,t
 338,A Class is composed of one or several attributes,6697,t,t
 339,A DataType has one and only one Attribute,7840,t,t
@@ -419,6 +423,8 @@ Transition has no attributes.",4715,t,t
 619,Use case diagrams have includes. each include includes one or more use cases,6465,t,t
 623,Use case diagrams have use case containers,2205,t,t
 625,Use case diagrams have behavioured classifiers,2390,t,t
+716,A default provider,2826,t,t
+717,The base class for named element in Ant Scripts,883,t,t
 537,A list attribute has zero or more list entries.,5397,t,t
 246,FiniteInteration is a special subclass of UnaryOperators with an extra integer attribute called interation.,1068,f,t
 540,A list entry is connected to one list attribute.,7346,t,t
