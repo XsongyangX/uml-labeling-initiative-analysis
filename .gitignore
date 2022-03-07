@@ -3,3 +3,4 @@ zoo/
 .vscode/
 *.tar*
 *.db
+.mypy_cache/

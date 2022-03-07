@@ -1,3 +1,6 @@
 [submodule "3step"]
 	path = 3step
 	url = https://github.com/XsongyangX/uml-translation-3step.git
+[submodule "three-step"]
+	path = three-step
+	url = https://github.com/XsongyangX/uml-translation-3step
